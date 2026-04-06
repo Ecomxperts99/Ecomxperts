@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcomXperts – Scale Your Ecommerce Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050810;
+  --surface: #0d1120;
+  --surface2: #141927;
+  --accent: #ff6b2b;
+  --accent2: #ff9f6b;
+  --blue: #3b82f6;
+  --text: #f0f4ff;
+  --muted: #8892a4;
+  --border: rgba(255,255,255,0.07);
+  --glow: rgba(255,107,43,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4,h5{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(5,8,16,0.85);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:.3s}
+.logo{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:.9rem;color:var(--muted);transition:.2s;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:10px 22px;border-radius:6px;font-weight:600!important;transition:.2s!important}
+.nav-cta:hover{background:#e55a20!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;width:100%;background:var(--surface);padding:24px 5%;flex-direction:column;gap:20px;border-bottom:1px solid var(--border);z-index:998}
+.mobile-menu a{font-size:1rem;color:var(--muted);font-weight:500}
+.mobile-menu a:hover{color:var(--text)}
+.mobile-menu .nav-cta{text-align:center;padding:14px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(255,107,43,0.08) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 10% 80%,rgba(59,130,246,0.06) 0%,transparent 60%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.4;pointer-events:none}
+.hero-content{max-width:700px;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,43,0.1);border:1px solid rgba(255,107,43,0.3);padding:6px 16px;border-radius:30px;font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:28px;animation:fadeUp .6s ease both}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:24px;animation:fadeUp .7s .1s ease both}
+.hero h1 .highlight{color:var(--accent);position:relative;display:inline-block}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:520px;margin-bottom:40px;animation:fadeUp .7s .2s ease both;font-weight:300}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
+.btn-primary{background:var(--accent);color:#fff;padding:15px 32px;border-radius:8px;font-weight:600;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:.25s;border:none;cursor:pointer}
+.btn-primary:hover{background:#e55a20;transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,43,0.3)}
+.btn-outline{background:transparent;color:var(--text);padding:15px 32px;border-radius:8px;font-weight:600;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:.25s;border:1px solid var(--border);cursor:pointer}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:40px;margin-top:56px;animation:fadeUp .7s .4s ease both;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text)}
+.stat-num span{color:var(--accent)}
+.stat-label{font-size:.85rem;color:var(--muted)}
+.hero-visual{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:42%;max-width:580px;animation:floatIn .9s .3s ease both;pointer-events:none}
+@keyframes floatIn{from{opacity:0;transform:translateY(-40%) translateX(30px)}to{opacity:1;transform:translateY(-50%) translateX(0)}}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem}
+.card-badge{background:rgba(34,197,94,0.15);color:#22c55e;font-size:.75rem;padding:4px 10px;border-radius:20px;font-weight:600}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.metric-row:last-child{border:none}
+.metric-label{color:var(--muted);font-size:.88rem}
+.metric-val{font-weight:700;font-size:1rem}
+.metric-val.up{color:#22c55e}
+.metric-val.orange{color:var(--accent)}
+.bar-wrap{margin-top:20px}
+.bar-label{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.bar-track{background:rgba(255,255,255,0.06);border-radius:4px;height:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;animation:grow 1.5s 1s ease both}
+@keyframes grow{from{width:0}to{width:var(--w)}}
+.bar-fill.orange{background:var(--accent)}
+.bar-fill.blue{background:var(--blue)}
+.bar-fill.green{background:#22c55e}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* MARQUEE */
+.marquee-section{padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--surface)}
+.marquee-track{display:flex;gap:48px;animation:marquee 20s linear infinite;white-space:nowrap}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.9rem;font-weight:500}
+.marquee-item .dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION STYLES */
+section{padding:90px 5%}
+.section-label{font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:20px}
+.section-sub{color:var(--muted);font-size:1.05rem;max-width:540px;font-weight:300}
+.text-center{text-align:center}
+.text-center .section-sub{margin:0 auto}
+
+/* SERVICES */
+#services{background:var(--bg)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px 30px;transition:.3s;position:relative;overflow:hidden;cursor:pointer}
+.service-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 0% 0%,var(--glow),transparent 60%);opacity:0;transition:.4s}
+.service-card:hover{border-color:rgba(255,107,43,0.3);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.service-card:hover::before{opacity:1}
+.service-icon{width:56px;height:56px;border-radius:14px;background:rgba(255,107,43,0.1);border:1px solid rgba(255,107,43,0.2);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:24px}
+.service-card h3{font-size:1.25rem;font-weight:700;margin-bottom:12px}
+.service-card p{color:var(--muted);font-size:.95rem;line-height:1.65;font-weight:300}
+.service-features{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.sf-item{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+.sf-item::before{content:'✓';color:var(--accent);font-weight:700;font-size:.9rem}
+.service-card .learn-more{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-size:.88rem;font-weight:600;margin-top:20px;transition:.2s}
+.service-card:hover .learn-more{gap:10px}
+
+/* WHY US */
+#why{background:var(--surface)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:60px}
+.why-list{display:flex;flex-direction:column;gap:24px}
+.why-item{display:flex;gap:18px;align-items:flex-start;padding:24px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;transition:.2s}
+.why-item:hover{border-color:rgba(255,107,43,0.2)}
+.why-icon{width:44px;height:44px;background:rgba(255,107,43,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.why-item h4{font-size:1rem;font-weight:700;margin-bottom:5px}
+.why-item p{color:var(--muted);font-size:.9rem;font-weight:300}
+.why-visual{position:relative}
+.results-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:16px}
+.results-card h4{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:20px}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.result-row:last-child{border:none}
+.r-label{color:var(--muted);font-size:.88rem}
+.r-val{font-weight:700;color:var(--accent);font-size:1rem}
+
+/* PROCESS */
+#process{background:var(--bg)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px;position:relative}
+.process-steps::before{content:'';position:absolute;top:40px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--accent),var(--blue),var(--accent));opacity:.3;z-index:0}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
+.step-num{width:80px;height:80px;border-radius:50%;background:var(--surface);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--accent);margin-bottom:20px;transition:.3s}
+.step:hover .step-num{border-color:var(--accent);background:rgba(255,107,43,0.1);box-shadow:0 0 30px rgba(255,107,43,0.2)}
+.step h4{font-size:1rem;font-weight:700;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.88rem;padding:0 12px;font-weight:300}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--surface)}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.tcard{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.2s}
+.tcard:hover{border-color:rgba(255,107,43,0.2);transform:translateY(-3px)}
+.stars{color:#f59e0b;font-size:1rem;margin-bottom:16px;letter-spacing:2px}
+.tcard p{color:var(--muted);font-size:.92rem;line-height:1.65;margin-bottom:20px;font-style:italic;font-weight:300}
+.tauthor{display:flex;align-items:center;gap:12px}
+.tavatar{width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem}
+.tauthor-info .name{font-weight:600;font-size:.9rem}
+.tauthor-info .role{color:var(--muted);font-size:.8rem}
+
+/* CTA STRIP */
+.cta-strip{background:linear-gradient(135deg,var(--accent) 0%,#ff8c42 100%);padding:70px 5%;text-align:center}
+.cta-strip h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-1px}
+.cta-strip p{color:rgba(255,255,255,0.85);font-size:1.1rem;margin-bottom:36px;font-weight:300}
+.btn-white{background:#fff;color:var(--accent);padding:15px 36px;border-radius:8px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:.25s;border:none;cursor:pointer}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+
+/* FOOTER */
+footer{background:var(--surface);padding:60px 5% 30px;border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{font-size:1.4rem;margin-bottom:14px;display:block}
+.footer-brand p{color:var(--muted);font-size:.9rem;max-width:260px;font-weight:300;line-height:1.65}
+.footer-col h5{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:18px;font-size:.95rem}
+.footer-col a{display:block;color:var(--muted);font-size:.88rem;margin-bottom:10px;transition:.2s;font-weight:400}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.footer-bottom p{color:var(--muted);font-size:.85rem}
+.socials{display:flex;gap:12px}
+.social-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--muted);transition:.2s}
+.social-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CONTACT */
+#contact{background:var(--bg)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:60px}
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:8px;color:var(--muted)}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:13px 16px;color:var(--text);font-size:.95rem;font-family:'DM Sans',sans-serif;transition:.2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-group select option{background:var(--surface2);color:var(--text)}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.cinfo-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.cinfo-icon{width:44px;height:44px;background:rgba(255,107,43,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.cinfo-item h4{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.cinfo-item p{color:var(--muted);font-size:.88rem;font-weight:300}
+
+/* POLICY PAGES */
+.policy-page{display:none;padding:100px 5% 60px}
+.policy-page.active{display:block}
+.policy-content{max-width:800px;margin:0 auto}
+.policy-content h1{font-size:2.5rem;font-weight:800;margin-bottom:8px;color:var(--text)}
+.policy-content .meta{color:var(--muted);font-size:.88rem;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.policy-content h2{font-size:1.3rem;font-weight:700;margin:32px 0 12px;color:var(--accent)}
+.policy-content p{color:var(--muted);line-height:1.75;margin-bottom:14px;font-weight:300;font-size:.95rem}
+.policy-content ul{color:var(--muted);padding-left:24px;margin-bottom:14px;line-height:2;font-size:.95rem;font-weight:300}
+.policy-content a{color:var(--accent)}
+.main-page{display:block}
+
+/* BACK TO TOP */
+.btt{position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:500;opacity:0;pointer-events:none;transition:.3s;border:none;font-size:1.1rem}
+.btt.visible{opacity:1;pointer-events:all}
+.btt:hover{background:#e55a20;transform:translateY(-2px)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-visual{display:none}
+  .hero-content{max-width:100%}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .services-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr;gap:24px}
+  .process-steps::before{display:none}
+  .testimonial-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .btn-primary,.btn-outline{font-size:.9rem;padding:13px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo" onclick="showPage('main')">Ecom<span>Xperts</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#process">Process</a>
+    <a href="#testimonials">Results</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Get Started →</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#why" onclick="toggleMenu()">Why Us</a>
+  <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#testimonials" onclick="toggleMenu()">Results</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#contact" class="nav-cta" onclick="toggleMenu()">Get Started →</a>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="main-page" id="mainPage">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🚀 India's Ecommerce Growth Partner</div>
+    <h1>Grow Your Ecom<br>Business <span class="highlight">10X Faster</span></h1>
+    <p>From Meta Ads to Website Development and Order Call Confirmation — we handle your entire ecommerce growth engine so you can focus on what matters.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start Scaling Today →</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">500<span>+</span></span><span class="stat-label">Brands Scaled</span></div>
+      <div class="stat"><span class="stat-num">₹25<span>Cr+</span></span><span class="stat-label">Revenue Generated</span></div>
+      <div class="stat"><span class="stat-num">92<span>%</span></span><span class="stat-label">Retention Rate</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-header">
+        <span class="card-title">Campaign Dashboard</span>
+        <span class="card-badge">● Live</span>
+      </div>
+      <div class="metric-row"><span class="metric-label">ROAS</span><span class="metric-val up">8.4x ↑</span></div>
+      <div class="metric-row"><span class="metric-label">Revenue Today</span><span class="metric-val orange">₹1,42,800</span></div>
+      <div class="metric-row"><span class="metric-label">Orders Confirmed</span><span class="metric-val up">247 ✓</span></div>
+      <div class="metric-row"><span class="metric-label">Cost per Order</span><span class="metric-val up">₹48 ↓</span></div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>Meta Ads Performance</span><span>94%</span></div>
+        <div class="bar-track"><div class="bar-fill orange" style="--w:94%"></div></div>
+      </div>
+      <div class="bar-wrap" style="margin-top:12px">
+        <div class="bar-label"><span>Website Conversion</span><span>78%</span></div>
+        <div class="bar-track"><div class="bar-fill blue" style="--w:78%"></div></div>
+      </div>
+      <div class="bar-wrap" style="margin-top:12px">
+        <div class="bar-label"><span>Order Confirmation</span><span>91%</span></div>
+        <div class="bar-track"><div class="bar-fill green" style="--w:91%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="dot"></span>Meta Ads Management</div>
+    <div class="marquee-item"><span class="dot"></span>Website Development</div>
+    <div class="marquee-item"><span class="dot"></span>Order Call Confirmation</div>
+    <div class="marquee-item"><span class="dot"></span>Ecommerce Growth</div>
+    <div class="marquee-item"><span class="dot"></span>ROAS Optimization</div>
+    <div class="marquee-item"><span class="dot"></span>Conversion Rate Optimization</div>
+    <div class="marquee-item"><span class="dot"></span>Lead Generation</div>
+    <div class="marquee-item"><span class="dot"></span>Business Scaling</div>
+    <!-- repeat -->
+    <div class="marquee-item"><span class="dot"></span>Meta Ads Management</div>
+    <div class="marquee-item"><span class="dot"></span>Website Development</div>
+    <div class="marquee-item"><span class="dot"></span>Order Call Confirmation</div>
+    <div class="marquee-item"><span class="dot"></span>Ecommerce Growth</div>
+    <div class="marquee-item"><span class="dot"></span>ROAS Optimization</div>
+    <div class="marquee-item"><span class="dot"></span>Conversion Rate Optimization</div>
+    <div class="marquee-item"><span class="dot"></span>Lead Generation</div>
+    <div class="marquee-item"><span class="dot"></span>Business Scaling</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="text-center">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Three Services.<br>One Mission — Your Growth.</h2>
+    <p class="section-sub">We specialize in three high-impact services designed to scale your ecommerce business profitably.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📢</div>
+      <h3>Meta Ads for Businesses</h3>
+      <p>Data-driven Facebook & Instagram advertising that puts your products in front of the right buyers at the right time — maximizing ROAS and minimizing wasted spend.</p>
+      <div class="service-features">
+        <div class="sf-item">Full campaign strategy & setup</div>
+        <div class="sf-item">Creative ad copy & design briefs</div>
+        <div class="sf-item">Audience research & targeting</div>
+        <div class="sf-item">Daily optimization & reporting</div>
+        <div class="sf-item">Retargeting & lookalike campaigns</div>
+      </div>
+      <span class="learn-more">Learn more →</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Website Development</h3>
+      <p>High-converting ecommerce websites built for speed, trust, and sales. From landing pages to full stores, we build digital experiences that turn visitors into buyers.</p>
+      <div class="service-features">
+        <div class="sf-item">Custom ecommerce store design</div>
+        <div class="sf-item">Landing pages that convert</div>
+        <div class="sf-item">Mobile-first & fast loading</div>
+        <div class="sf-item">Payment gateway integration</div>
+        <div class="sf-item">SEO-optimized architecture</div>
+      </div>
+      <span class="learn-more">Learn more →</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📞</div>
+      <h3>Order Call Confirmation</h3>
+      <p>Dedicated call confirmation team that verifies COD orders, reduces RTO, and boosts your fulfillment rate — saving you lakhs in returns every month.</p>
+      <div class="service-features">
+        <div class="sf-item">Trained confirmation agents</div>
+        <div class="sf-item">Same-day order verification</div>
+        <div class="sf-item">Reduced RTO & returns</div>
+        <div class="sf-item">Order data management</div>
+        <div class="sf-item">Detailed call reports daily</div>
+      </div>
+      <span class="learn-more">Learn more →</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-grid">
+    <div>
+      <p class="section-label">Why EcomXperts</p>
+      <h2 class="section-title">Results-Driven.<br>No Excuses.</h2>
+      <p class="section-sub">We're not a generic agency. We eat, breathe, and sleep ecommerce — and we measure everything in revenue, not vanity metrics.</p>
+      <div class="why-list" style="margin-top:36px">
+        <div class="why-item">
+          <div class="why-icon">🎯</div>
+          <div>
+            <h4>Ecommerce Specialists Only</h4>
+            <p>We work exclusively with ecommerce brands. No distractions, no half-measures — 100% focused on what works for online sellers.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📊</div>
+          <div>
+            <h4>Data-Backed Decisions</h4>
+            <p>Every decision is backed by real data. We track every rupee spent and every rupee earned so you know exactly what's working.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">⚡</div>
+          <div>
+            <h4>Fast Execution</h4>
+            <p>We move fast. Campaigns live in 48 hours, websites delivered on deadline, and calls confirmed the same day orders come in.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🤝</div>
+          <div>
+            <h4>Long-Term Partnership</h4>
+            <p>We grow when you grow. Our incentives are aligned — we're invested in your success for the long haul, not just for a month.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="results-card">
+        <h4>📈 Client Result Snapshot</h4>
+        <div class="result-row"><span class="r-label">Monthly Revenue Before</span><span class="r-val">₹2.1L</span></div>
+        <div class="result-row"><span class="r-label">Monthly Revenue After</span><span class="r-val">₹18.4L</span></div>
+        <div class="result-row"><span class="r-label">ROAS Achieved</span><span class="r-val">9.2x</span></div>
+        <div class="result-row"><span class="r-label">RTO Rate (Down)</span><span class="r-val">12% → 4%</span></div>
+        <div class="result-row"><span class="r-label">Time to Results</span><span class="r-val">45 Days</span></div>
+      </div>
+      <div class="results-card">
+        <h4>🏆 Our Track Record</h4>
+        <div class="result-row"><span class="r-label">Brands Scaled</span><span class="r-val">500+</span></div>
+        <div class="result-row"><span class="r-label">Total Ad Spend Managed</span><span class="r-val">₹5Cr+</span></div>
+        <div class="result-row"><span class="r-label">Avg ROAS for Clients</span><span class="r-val">7.8x</span></div>
+        <div class="result-row"><span class="r-label">Client Retention Rate</span><span class="r-val">92%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="text-center">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">From Onboarding to<br>Revenue in 4 Steps</h2>
+    <p class="section-sub">We've streamlined our process to get you results as fast as possible without compromising on quality.</p>
+  </div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Discovery Call</h4>
+      <p>We learn about your business, goals, and current challenges to build a custom strategy.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Strategy & Setup</h4>
+      <p>We craft your growth plan, set up campaigns, and prepare all assets needed to launch.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Launch & Optimize</h4>
+      <p>We go live, monitor performance daily, and optimize relentlessly for maximum ROI.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Scale & Report</h4>
+      <p>We scale what works, kill what doesn't, and report everything transparently every week.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="text-center">
+    <p class="section-label">Client Results</p>
+    <h2 class="section-title">Real Brands.<br>Real Revenue.</h2>
+    <p class="section-sub">Don't take our word for it — hear from the founders and business owners we've scaled.</p>
+  </div>
+  <div class="testimonial-grid">
+    <div class="tcard">
+      <div class="stars">★★★★★</div>
+      <p>"EcomXperts took our Meta Ads from a money pit to our biggest revenue channel. In just 2 months, our ROAS went from 2x to 8.6x. Absolutely game-changing."</p>
+      <div class="tauthor">
+        <div class="tavatar">RK</div>
+        <div class="tauthor-info">
+          <div class="name">Rahul Kapoor</div>
+          <div class="role">Founder, NaturaBuy</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="stars">★★★★★</div>
+      <p>"Their order confirmation team reduced our RTO from 38% to just 9%. That alone saved us over ₹3 lakhs a month. Wish we had found them sooner!"</p>
+      <div class="tauthor">
+        <div class="tavatar">PS</div>
+        <div class="tauthor-info">
+          <div class="name">Priya Sharma</div>
+          <div class="role">CEO, StyleHaul India</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="stars">★★★★★</div>
+      <p>"They built our entire store in under 2 weeks and it converts at 4.8%. Combined with their Meta Ads, we crossed ₹10L monthly revenue in 60 days. Incredible team."</p>
+      <div class="tauthor">
+        <div class="tavatar">AM</div>
+        <div class="tauthor-info">
+          <div class="name">Arjun Mehta</div>
+          <div class="role">Founder, FitGear Pro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="text-center">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Ready to Scale?<br>Let's Talk.</h2>
+    <p class="section-sub">Fill out the form and our team will reach out within 24 hours with a customized growth plan for your business.</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-form">
+      <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:24px">Send Us a Message</h3>
+      <div class="form-group">
+        <label>Your Full Name</label>
+        <input type="text" placeholder="e.g. Rahul Sharma">
+      </div>
+      <div class="form-group">
+        <label>Phone Number / WhatsApp</label>
+        <input type="tel" placeholder="+91 98765 43210">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@yourbrand.com">
+      </div>
+      <div class="form-group">
+        <label>Service Interested In</label>
+        <select>
+          <option value="">Select a service…</option>
+          <option>Meta Ads for Businesses</option>
+          <option>Website Development</option>
+          <option>Order Call Confirmation</option>
+          <option>All Three Services</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Us About Your Business</label>
+        <textarea placeholder="What do you sell? What's your current monthly revenue? What challenge are you facing?"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm()">Submit Inquiry →</button>
+    </div>
+    <div class="contact-info">
+      <div class="cinfo-item">
+        <div class="cinfo-icon">📧</div>
+        <div>
+          <h4>Email Us</h4>
+          <p>hello@ecomxperts.in<br>support@ecomxperts.in</p>
+        </div>
+      </div>
+      <div class="cinfo-item">
+        <div class="cinfo-icon">📱</div>
+        <div>
+          <h4>Call / WhatsApp</h4>
+          <p>+91 98765 43210<br>Mon – Sat, 10am – 7pm IST</p>
+        </div>
+      </div>
+      <div class="cinfo-item">
+        <div class="cinfo-icon">📍</div>
+        <div>
+          <h4>Our Location</h4>
+          <p>Kanpur, Uttar Pradesh, India</p>
+        </div>
+      </div>
+      <div class="cinfo-item">
+        <div class="cinfo-icon">⏱️</div>
+        <div>
+          <h4>Response Time</h4>
+          <p>We respond to all enquiries within 24 business hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h2>Stop Leaving Revenue on the Table.</h2>
+  <p>Book a free 30-minute strategy call and let us show you exactly how we'll grow your business.</p>
+  <a href="#contact" class="btn-white">Book Free Strategy Call →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" onclick="showPage('main')">Ecom<span>Xperts</span></a>
+      <p>Your end-to-end ecommerce growth partner. Meta Ads, Website Development, and Order Call Confirmation — all under one roof.</p>
+      <div class="socials" style="margin-top:20px">
+        <a class="social-btn" href="#" title="Facebook">f</a>
+        <a class="social-btn" href="#" title="Instagram">in</a>
+        <a class="social-btn" href="#" title="WhatsApp">W</a>
+        <a class="social-btn" href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#services">Meta Ads</a>
+      <a href="#services">Website Development</a>
+      <a href="#services">Order Confirmation</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#why">About Us</a>
+      <a href="#process">Our Process</a>
+      <a href="#testimonials">Results</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="#" onclick="showPage('terms')">Terms & Conditions</a>
+      <a href="#" onclick="showPage('refund')">Refund Policy</a>
+      <a href="#" onclick="showPage('disclaimer')">Disclaimer</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 EcomXperts. All rights reserved. | GST: 09XXXXX1234X1ZX</p>
+    <p style="color:var(--muted);font-size:.8rem">Made with ❤️ in India</p>
+  </div>
+</footer>
+
+</div><!-- end main-page -->
+
+<!-- ===== POLICY PAGES ===== -->
+
+<!-- PRIVACY POLICY -->
+<div class="policy-page" id="privacyPage">
+  <div class="policy-content">
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: January 1, 2025 &nbsp;|&nbsp; EcomXperts</p>
+    <h2>1. Introduction</h2>
+    <p>EcomXperts ("we", "our", or "us") is committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy or our practices with regards to your personal information, please contact us at hello@ecomxperts.in.</p>
+    <p>When you visit our website ecomxperts.in (the "Website") and use our services, you trust us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it, and what rights you have in relation to it.</p>
+
+    <h2>2. Information We Collect</h2>
+    <p>We collect personal information that you voluntarily provide to us when you register on the Website, express an interest in obtaining information about us or our products and services, when you participate in activities on the Website, or otherwise when you contact us. The personal information we collect may include the following:</p>
+    <ul>
+      <li>Name and contact data (first and last name, email address, phone number)</li>
+      <li>Business information (business name, revenue, product category)</li>
+      <li>Payment data (processed securely via payment gateways)</li>
+      <li>Log and usage data (IP address, browser type, pages visited)</li>
+      <li>Device data (device identifiers, operating system)</li>
+    </ul>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We use personal information collected via our Website for a variety of business purposes described below:</p>
+    <ul>
+      <li>To facilitate account creation and logon process</li>
+      <li>To post testimonials with your consent</li>
+      <li>To send marketing and promotional communications</li>
+      <li>To deliver and facilitate delivery of services to the user</li>
+      <li>To respond to user inquiries and offer support</li>
+      <li>To send administrative information to you</li>
+      <li>To fulfil and manage your orders and payments</li>
+      <li>To enforce our terms, conditions and policies</li>
+      <li>To respond to legal requests and prevent harm</li>
+    </ul>
+
+    <h2>4. Sharing Your Information</h2>
+    <p>We may process or share data based on the following legal basis: Consent, Legitimate Interests, Performance of a Contract, Legal Obligations. We may share your data with third-party vendors, service providers, and contractors who perform services for us. We do not sell your personal information to third parties.</p>
+
+    <h2>5. Cookies and Tracking Technologies</h2>
+    <p>We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Notice.</p>
+
+    <h2>6. Data Retention</h2>
+    <p>We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements).</p>
+
+    <h2>7. Security of Your Information</h2>
+    <p>We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure.</p>
+
+    <h2>8. Your Privacy Rights</h2>
+    <p>In some regions, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time by contacting us at hello@ecomxperts.in.</p>
+
+    <h2>9. Updates to This Policy</h2>
+    <p>We may update this privacy notice from time to time. The updated version will be indicated by an updated "Last Updated" date and the updated version will be effective as soon as it is accessible.</p>
+
+    <h2>10. Contact Us</h2>
+    <p>If you have questions or comments about this notice, you may email us at hello@ecomxperts.in or contact us at: EcomXperts, Kanpur, Uttar Pradesh, India.</p>
+
+    <br><a href="#" onclick="showPage('main')" style="display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:600">← Back to Home</a>
+  </div>
+</div>
+
+<!-- TERMS & CONDITIONS -->
+<div class="policy-page" id="termsPage">
+  <div class="policy-content">
+    <h1>Terms &amp; Conditions</h1>
+    <p class="meta">Last updated: January 1, 2025 &nbsp;|&nbsp; EcomXperts</p>
+    <h2>1. Agreement to Terms</h2>
+    <p>These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and EcomXperts ("we," "us" or "our"), concerning your access to and use of the ecomxperts.in website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.</p>
+    <p>You agree that by accessing the Website, you have read, understood, and agree to be bound by all of these Terms and Conditions. If you do not agree with all of these Terms and Conditions, then you are expressly prohibited from using the Website and you must discontinue use immediately.</p>
+
+    <h2>2. Services</h2>
+    <p>EcomXperts provides the following services:</p>
+    <ul>
+      <li><strong>Meta Ads for Businesses:</strong> Facebook and Instagram advertising campaign management, strategy, and optimization.</li>
+      <li><strong>Website Development:</strong> Design and development of ecommerce websites, landing pages, and digital storefronts.</li>
+      <li><strong>Order Call Confirmation:</strong> Outbound call services for verifying and confirming customer orders on behalf of ecommerce businesses.</li>
+    </ul>
+
+    <h2>3. Intellectual Property Rights</h2>
+    <p>Unless otherwise indicated, the Website is our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the Website (collectively, the "Content") and the trademarks, service marks, and logos contained therein (the "Marks") are owned or controlled by us or licensed to us.</p>
+
+    <h2>4. User Representations</h2>
+    <p>By using the Website, you represent and warrant that: (1) you have the legal capacity and you agree to comply with these Terms and Conditions; (2) you are not a minor in the jurisdiction in which you reside; (3) you will not access the Website through automated or non-human means; (4) you will not use the Website for any illegal or unauthorized purpose; (5) your use of the Website will not violate any applicable law or regulation.</p>
+
+    <h2>5. Payment Terms</h2>
+    <p>We accept payment via bank transfer, UPI, and other methods as communicated during onboarding. All fees are exclusive of applicable taxes. Payment is due as per the agreed schedule in your service agreement. Late payments may result in service suspension. We reserve the right to change our pricing with 30 days' notice to existing clients.</p>
+
+    <h2>6. Service Agreements & Deliverables</h2>
+    <p>The specific scope of work, deliverables, timelines, and pricing are detailed in individual service agreements or proposals provided to each client. The terms of these agreements form part of the overall contract between EcomXperts and the client.</p>
+
+    <h2>7. Limitation of Liability</h2>
+    <p>In no event will we or our directors, employees, or agents be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages, including lost profit, lost revenue, loss of data, or other damages arising from your use of the Website or our services, even if we have been advised of the possibility of such damages.</p>
+    <p>We do not guarantee specific results from our services. Advertising performance, website conversion rates, and order confirmation success rates depend on many factors outside our control including but not limited to market conditions, product quality, and platform algorithm changes.</p>
+
+    <h2>8. Indemnification</h2>
+    <p>You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand made by any third party due to or arising out of your use of the Website or our services.</p>
+
+    <h2>9. Governing Law</h2>
+    <p>These Terms shall be governed by and defined following the laws of India. EcomXperts and yourself irrevocably consent that the courts of Kanpur, Uttar Pradesh shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.</p>
+
+    <h2>10. Contact Us</h2>
+    <p>In order to resolve a complaint regarding the Website or to receive further information regarding use of the Website, please contact us at hello@ecomxperts.in.</p>
+
+    <br><a href="#" onclick="showPage('main')" style="display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:600">← Back to Home</a>
+  </div>
+</div>
+
+<!-- REFUND POLICY -->
+<div class="policy-page" id="refundPage">
+  <div class="policy-content">
+    <h1>Refund Policy</h1>
+    <p class="meta">Last updated: January 1, 2025 &nbsp;|&nbsp; EcomXperts</p>
+    <h2>1. Overview</h2>
+    <p>At EcomXperts, we are committed to delivering exceptional results for every client. This Refund Policy outlines the terms under which refunds may be issued for our services: Meta Ads Management, Website Development, and Order Call Confirmation.</p>
+
+    <h2>2. Meta Ads Management</h2>
+    <p>Our Meta Ads management fees cover strategy, setup, creative guidance, ongoing optimization, and reporting. The following refund terms apply:</p>
+    <ul>
+      <li><strong>Setup fees</strong> are non-refundable once campaign setup has commenced.</li>
+      <li><strong>Monthly management fees</strong> are non-refundable once the billing period has started and services have been delivered.</li>
+      <li>Ad spend (money paid to Meta/Facebook directly) is not managed or refundable by EcomXperts. Any ad credit disputes must be raised directly with Meta.</li>
+      <li>If we fail to deliver agreed setup within the committed timeframe due to our fault, a partial or full refund of the setup fee may be issued at our discretion.</li>
+    </ul>
+
+    <h2>3. Website Development</h2>
+    <p>Refunds for website development projects are governed as follows:</p>
+    <ul>
+      <li>An initial deposit (typically 50%) is required before work commences and is <strong>non-refundable</strong> once design or development work has begun.</li>
+      <li>If the project is cancelled by the client before work begins, the full deposit may be refunded minus any administrative charges.</li>
+      <li>The remaining balance is due upon project completion and delivery and is non-refundable once the final deliverable has been handed over.</li>
+      <li>We will work with you to resolve any issues or bugs that fall within the agreed scope of work at no additional charge within 30 days of delivery.</li>
+    </ul>
+
+    <h2>4. Order Call Confirmation</h2>
+    <p>Order confirmation services are billed based on confirmed calls or monthly retainer as agreed:</p>
+    <ul>
+      <li>Per-confirmation fees are non-refundable once calls have been made and reported.</li>
+      <li>Monthly retainer fees are non-refundable once the service period has commenced.</li>
+      <li>If there is a demonstrable error on our part (e.g., calls not made, incorrect data provided), a proportional credit or refund will be issued.</li>
+    </ul>
+
+    <h2>5. Requesting a Refund</h2>
+    <p>To request a refund, please contact us at hello@ecomxperts.in with your name, business name, service purchased, date of purchase, and reason for the refund request. We aim to respond to all refund requests within 5 business days.</p>
+
+    <h2>6. Processing Time</h2>
+    <p>Approved refunds will be processed within 7–14 business days and returned via the original payment method. We are not responsible for delays caused by banks or payment processors.</p>
+
+    <h2>7. Disputes</h2>
+    <p>If you are unsatisfied with our services, we strongly encourage you to contact us first so we can resolve the issue. We take client satisfaction seriously and will make every reasonable effort to find a fair solution.</p>
+
+    <br><a href="#" onclick="showPage('main')" style="display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:600">← Back to Home</a>
+  </div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="policy-page" id="disclaimerPage">
+  <div class="policy-content">
+    <h1>Disclaimer</h1>
+    <p class="meta">Last updated: January 1, 2025 &nbsp;|&nbsp; EcomXperts</p>
+    <h2>1. Website Disclaimer</h2>
+    <p>The information provided by EcomXperts ("we," "us," or "our") on ecomxperts.in (the "Site") is for general informational purposes only. All information on the Site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site.</p>
+
+    <h2>2. No Results Guarantee</h2>
+    <p>The testimonials, case studies, and results mentioned on this website represent results achieved by specific clients under specific conditions. These results are not typical and are not a guarantee that you or any other client will achieve the same or similar results. Digital marketing performance depends on numerous factors including but not limited to your product, market competition, ad budget, audience, website quality, and economic conditions.</p>
+    <p>EcomXperts does not guarantee any specific level of revenue, ROAS, conversion rate, or order confirmation rate. Past performance of client campaigns is not indicative of future results.</p>
+
+    <h2>3. External Links Disclaimer</h2>
+    <p>The Site may contain links to other websites or content belonging to or originating from third parties or links to websites and features. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us. We do not warrant, endorse, guarantee, or assume responsibility for the accuracy or reliability of any information offered by third-party websites.</p>
+
+    <h2>4. Professional Advice Disclaimer</h2>
+    <p>The Site cannot and does not contain business, financial, or legal advice. The information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals.</p>
+
+    <h2>5. Errors and Omissions Disclaimer</h2>
+    <p>While we have made every attempt to ensure that the information contained in this site has been obtained from reliable sources, EcomXperts is not responsible for any errors or omissions, or for the results obtained from the use of this information.</p>
+
+    <h2>6. Fair Use Disclaimer</h2>
+    <p>EcomXperts may use copyrighted material which has not always been specifically authorized by the copyright owner. We are making such material available for purposes of commentary, criticism, news reporting, teaching, scholarship, or research. We believe this constitutes a "fair use" of any such copyrighted material as provided for in section 107 of the US Copyright Law.</p>
+
+    <h2>7. Views Expressed Disclaimer</h2>
+    <p>The views and opinions expressed on this website are purely those of the authors. Any views or opinions are not intended to malign any religion, ethnic group, club, organization, company, or individual. Any product claim, statistic, quote, or other representation about a product or service should be verified with the relevant manufacturer, provider, or party.</p>
+
+    <h2>8. Contact</h2>
+    <p>Should you have any feedback, comments, requests for technical support or other inquiries, please contact us by email: hello@ecomxperts.in.</p>
+
+    <br><a href="#" onclick="showPage('main')" style="display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:600">← Back to Home</a>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// NAV
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+}
+window.addEventListener('scroll',()=>{
+  const btt=document.getElementById('btt');
+  btt.classList.toggle('visible',window.scrollY>400);
+  const nav=document.getElementById('navbar');
+  nav.style.boxShadow=window.scrollY>40?'0 4px 30px rgba(0,0,0,.4)':'none';
+});
+document.querySelectorAll('.nav-links a, .mobile-menu a, .hero-btns a, .cta-strip a, footer a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href&&href.startsWith('#')&&href.length>1){
+      e.preventDefault();
+      const el=document.querySelector(href);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+
+// PAGE SWITCHING
+function showPage(page){
+  document.getElementById('mainPage').style.display='none';
+  document.querySelectorAll('.policy-page').forEach(p=>p.classList.remove('active'));
+  if(page==='main'){
+    document.getElementById('mainPage').style.display='block';
+  } else {
+    const map={privacy:'privacyPage',terms:'termsPage',refund:'refundPage',disclaimer:'disclaimerPage'};
+    const el=document.getElementById(map[page]);
+    if(el) el.classList.add('active');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+  return false;
+}
+
+// FORM
+function submitForm(){
+  const btn=event.target;
+  btn.textContent='Sending…';
+  btn.disabled=true;
+  setTimeout(()=>{
+    btn.textContent='✓ Sent! We\'ll reach out soon.';
+    btn.style.background='#22c55e';
+    setTimeout(()=>{
+      btn.textContent='Submit Inquiry →';
+      btn.style.background='';
+      btn.disabled=false;
+    },4000);
+  },1200);
+}
+
+// COUNTER ANIMATION
+function animateCounters(){
+  document.querySelectorAll('.stat-num').forEach(el=>{
+    const text=el.innerHTML;
+    const num=parseFloat(text.replace(/[^0-9.]/g,''));
+    const suffix=text.replace(/[0-9.]/g,'');
+    if(isNaN(num)) return;
+    let start=0;
+    const dur=1500;
+    const step=16;
+    const inc=num/(dur/step);
+    const t=setInterval(()=>{
+      start=Math.min(start+inc,num);
+      el.innerHTML=(Number.isInteger(num)?Math.round(start):start.toFixed(1))+suffix;
+      if(start>=num) clearInterval(t);
+    },step);
+  });
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){animateCounters();obs.disconnect();}});
+},{threshold:.3});
+const statsEl=document.querySelector('.hero-stats');
+if(statsEl) obs.observe(statsEl);
+</script>
+</body>
+</html>
